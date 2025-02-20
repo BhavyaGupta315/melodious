@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import { Sparkles, BadgeX } from 'lucide-react';
+import { Sparkles, X } from 'lucide-react';
 
 const PromoBanner: React.FC = () => {
     const [isVisible, setIsVisible] = useState(true);
@@ -25,7 +25,7 @@ const PromoBanner: React.FC = () => {
                                 className='text-white/80 hover:text-white transition-colors cursor-pointer'
                                 aria-label='Close promotion banner'
                             >
-                                <BadgeX/>
+                                <X className="w-6 h-6" />
                             </button>   
                     </div>
                 </div>
