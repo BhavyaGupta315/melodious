@@ -28,12 +28,12 @@ const SiteHeader: React.FC = () => {
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex gap-6">
+            <nav className="hidden md:flex gap-6 mt-2">
                 {navigation.map((item) => (
                     <Link
                     key={item.name}
                     href={item.href}
-                    className="text-xs font-medium transition-colors hover:text-[hsl(var(--primary))]"
+                    className="text-md font-medium transition-colors hover:text-[hsl(var(--primary))]"
                     onClick={() => scrollToSection(item.name)}
                   >
                     {item.name}
