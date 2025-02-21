@@ -58,7 +58,7 @@ export default function MusicServices() {
     name: "",
     email: "",
     occasion: "",
-    requirements: "",
+    requirement: "",
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -66,7 +66,7 @@ export default function MusicServices() {
     setIsSubmitting(true)
 
     try {
-      const response = await fetch("/api/music-requests", {
+      const response = await fetch("/api/music-section", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,7 +90,7 @@ export default function MusicServices() {
         name: "",
         email: "",
         occasion: "",
-        requirements: "",
+        requirement: "",
       })
     } catch (error) {
       toast({
@@ -229,8 +229,8 @@ export default function MusicServices() {
                       id="requirements"
                       placeholder="Tell us about your story and song preferences..."
                       className="min-h-[100px]"
-                      value={requestForm.requirements}
-                      onChange={(e) => setRequestForm((prev) => ({ ...prev, requirements: e.target.value }))}
+                      value={requestForm.requirement}
+                      onChange={(e) => setRequestForm((prev) => ({ ...prev, requirement: e.target.value }))}
                       required
                     />
                   </div>
