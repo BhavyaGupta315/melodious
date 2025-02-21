@@ -9,17 +9,18 @@ import Link from 'next/link';
 const navigation = [
     { name: "How It Works", href: "#how-it-works" },
     { name: "Hampers", href: "#hampers" },
-    { name: "Music Services", href: "#music-services" },
     { name: "Testimonials", href: "#testimonials" },
+    { name: "Contact Us", href: "#contact" },
   ]
 
 const SiteHeader: React.FC = () => {
-    const scrollToSection = (id: string) => {
-        const section = document.querySelector(id);
-        if (section) {
-            section.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
+        const scrollToSection = (id: string) => {
+            console.log(id);
+            const section = document.querySelector(id);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth', block:'start' });
+            }
+        };
     return (
         <header className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 flex flex-col items-center justify-between px-6 py-4">
             {/* Logo */}
@@ -34,7 +35,7 @@ const SiteHeader: React.FC = () => {
                     key={item.name}
                     href={item.href}
                     className="text-md font-medium transition-colors hover:text-[hsl(var(--primary))]"
-                    onClick={() => scrollToSection(item.name)}
+                    onClick={() => scrollToSection(item.href)}
                   >
                     {item.name}
                   </Link>

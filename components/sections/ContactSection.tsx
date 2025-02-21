@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -5,8 +6,42 @@ import { WhatsAppSupport } from "@/components/WhatsAppSupport"
 import { playfair } from "@/components/fonts"
 import { Facebook, Instagram, Send, Youtube } from "lucide-react"
 import Link from "next/link"
+import { useState } from "react"
 
 export default function ContactSection() {
+    const [nameDetail, setNameDetail] = useState("");
+    const [emailDetail, setEmailDetail] = useState("");
+    const [messageDetail, setMessageDetail] = useState("");
+
+    const handleOrder = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+          const response = await fetch("/api/contact", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: nameDetail,
+              email : emailDetail,
+              message: messageDetail,
+            }),
+          });
+    
+          const data = await response.json();
+    
+          if (!response.ok) {
+            throw new Error(data.error || "Failed to Contact");
+          }
+    
+          // Reset form
+          setNameDetail("");
+          setEmailDetail("");
+          setMessageDetail("");
+        } catch (error) {
+          console.error(error);
+        }
+      }
   return (
     <section id="contact" className="py-20 bg-gradient-to-b from-white to-pink-50">
       <div className="mx-10">
@@ -52,22 +87,31 @@ export default function ContactSection() {
                 <label htmlFor="name" className="text-sm font-medium">
                   Name
                 </label>
-                <Input id="name" placeholder="Your name" />
+                <Input id="name" placeholder="Your name" onChange={(e) => setNameDetail(e.target.value)}/>
               </div>
               <div className="space-y-2">
                 <label htmlFor="email" className="text-sm font-medium">
                   Email
                 </label>
-                <Input id="email" type="email" placeholder="Your email" />
+                <Input id="email" type="email" placeholder="Your email" onChange={(e) => setEmailDetail(e.target.value)}/>
               </div>
             </div>
             <div className="space-y-2">
               <label htmlFor="message" className="text-sm font-medium">
                 Message
               </label>
-              <Textarea id="message" placeholder="Tell us about your special occasion..." className="min-h-[150px]" />
+              <Textarea 
+              id="message"
+              placeholder="Tell us about your special occasion..." 
+              className="min-h-[150px]"  
+              onChange={(e) => setMessageDetail(e.target.value)}
+              />
             </div>
-            <Button size="lg" className="w-full sm:w-auto cursor-pointer hover:bg-[#C9193F]">
+            <Button
+            size="lg" 
+            className="w-full sm:w-auto cursor-pointer hover:bg-[#C9193F]"
+            onClick={handleOrder}
+            >
               Send Message
             </Button>
           </div>
