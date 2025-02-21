@@ -159,7 +159,7 @@ export default function HamperSection() {
                 key={index}
                 className={`relative overflow-hidden transition-all duration-300 border-2 ${
                   plan.popular ? "scale-102 shadow-xl" : ""
-                } ${plan.hoverColor} hover:scale-105`}
+                } ${plan.hoverColor} hover:scale-105 cursor-pointer`}
                 onMouseEnter={() => setHoveredCard(index)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
